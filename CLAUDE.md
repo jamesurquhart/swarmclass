@@ -27,11 +27,38 @@ A 3-hour intermediate-level workshop on agentic software development with claude
 | 1.7 Handoff Patterns | 8 min | 21-25 | Four patterns, demo illustration, shared memory preview |
 | Wrap-up + Q&A | 5 min | 26-27 | Recap, Section 2 preview |
 
-**Section 2: Swarm Instantiation and Exploration** (60 min)
-- TBD - Hands-on with Claude Code agents and claude-flow
+**Section 2: Creating Advanced Multi-Agent Systems in Claude Code** (60 min)
+- Outline: `presentation/scripts/section-2-outline.md`
+- Focus: Structured, orchestrated multi-agent systems
 
-**Section 3: Best Practices for Using Swarms** (60 min)
-- TBD - When NOT to use swarms, iteration strategies
+| Module | Time | Content |
+|--------|------|---------|
+| 2.1 Intro + Demo 1 Results | 5 min | Transition, show pipeline results |
+| 2.2 Anthropic Agent Support | 10 min | Task tool recap, agent definitions, tool patterns |
+| 2.3 Hierarchical Pattern | 8 min | Deep dive, implementation guidance, real-world use cases |
+| 2.4 Demo 2 Setup Part 1 | 8 min | Create reviewers, show sample code |
+| 2.5 Debate Pattern | 7 min | Deep dive, disagreement handling, use cases |
+| 2.6 Demo 2 Complete + Run | 10 min | Add coordinator, run demo |
+| 2.7 Committee Pattern | 5 min | Deep dive, aggregation strategies |
+| 2.8 Dynamic Routing | 5 min | Brief implementation guidance |
+| 2.9 Demo 2 Results | 5 min | Walk through output, connect patterns |
+| 2.10 Wrap-up | 5 min | Recap, Section 3 preview |
+
+**Section 3: Applying Multi-Agent Patterns** (60 min)
+- Outline: `presentation/scripts/section-3-outline.md`
+- Focus: Synthesis, decision-making, choosing the right architecture
+
+| Module | Time | Content |
+|--------|------|---------|
+| 3.1 Introduction | 5 min | Architecture spectrum, control vs emergence |
+| 3.2 Emergent Coordination | 5 min | Brief claude-flow overview, Agentics Foundation vs AAIF |
+| 3.3 Demo Walkthrough | 10 min | Pre-recorded swarm output, memory trail analysis |
+| 3.4 Decision Framework | 15 min | Choosing architectures, criteria tables, hybrid approaches |
+| 3.5 Best Practices & Safety | 7 min | Cost awareness, safety rails, failure modes |
+| 3.6 Q&A + Optional Live Demo | 13 min | Audience questions, live demo if time permits |
+| 3.7 Course Wrap-Up | 5 min | Full recap, resources, next steps |
+
+**Note**: Demo 3 is pre-recorded due to alpha software unpredictability and hour 3 cognitive load. See `context/demo-plan.md` for recording instructions.
 
 ### Six Multi-Agent Architectures Covered
 
@@ -54,6 +81,9 @@ A 3-hour intermediate-level workshop on agentic software development with claude
   - `scripts/` - Speaker notes and demo scripts
     - `section-1-outline.md` - Detailed lesson plan for Section 1
     - `section-1-script.md` - Full script with slide descriptions (27 slides)
+    - `section-2-outline.md` - Detailed lesson plan for Section 2
+    - `section-2-script.md` - Full script with slide descriptions (26 slides)
+- `README.md` - Project overview and setup instructions
 
 ## Workshop Demos
 

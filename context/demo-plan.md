@@ -358,151 +358,238 @@ Act as a neutral arbiter. Ask each reviewer to defend their position with specif
 
 ## Demo 3: Self-Organizing Swarm with Claude Flow
 
-**Architecture:** Collaborative Network (Society)  
-**Time:** 20-30 minutes  
-**What You'll Build:** A self-organizing swarm of agents that coordinate to build a simple web application, with real-time visibility into their coordination.
+**Architecture:** Collaborative Network (Society)
+**Time:** 10 minutes (pre-recorded walkthrough)
+**What You'll Show:** A pre-recorded swarm building a todo app, with walkthrough of the output and memory trail.
+
+**Important:** This demo is pre-recorded due to alpha software unpredictability and student attention in hour 3. A live demo option is available if time permits.
 
 ### Learning Objectives
 
-- Deploy a multi-agent swarm using Claude Flow
-- Observe emergent coordination between specialized agents
-- Use shared memory for agent communication
-- Monitor swarm activity in real-time
+- Understand how emergent coordination differs from structured orchestration
+- See how agents discover work through shared memory
+- Observe the output of a self-organizing swarm
+- Understand when swarm patterns are appropriate
 
-### Setup
+---
 
-1. Install Claude Flow:
+## Pre-Recording Instructions (Before the Live Session)
 
+### Recording Setup
+
+**Environment:**
 ```bash
-# Install globally
+# Install claude-flow
 npm install -g claude-flow@alpha
 
-# Or use npx (recommended)
-npx claude-flow@alpha --version
-```
+# Create fresh project directory
+mkdir demo-swarm-recording
+cd demo-swarm-recording
 
-2. Create project and initialize:
-
-```bash
-mkdir demo-swarm
-cd demo-swarm
-
-# Initialize Claude Flow with swarm configuration
+# Initialize
 npx claude-flow@alpha init --force
 ```
 
-3. Add Claude Flow as an MCP server to Claude Code:
+**Recording Tools:**
+- Terminal recording: Use `asciinema` or screen recording software
+- Capture both terminal output AND resulting files
+- Record multiple takes—pick the cleanest run
+
+### Recording the Demo
+
+**Step 1: Initialize and spawn agents**
 
 ```bash
-claude mcp add claude-flow npx claude-flow@alpha mcp start
-```
-
-4. Verify the setup:
-
-```bash
-# Check MCP integration
-claude mcp list
-
-# Verify swarm tools are available
-npx claude-flow@alpha mcp tools list
-```
-
-### Running the Demo
-
-**Option A: Command Line Swarm**
-
-Launch a swarm with a single command:
-
-```bash
-npx claude-flow@alpha swarm "Build a simple todo list web app with HTML, CSS, and vanilla JavaScript" --claude
-```
-
-This will automatically:
-- Initialize a mesh topology swarm
-- Spawn appropriate agents (architect, frontend developer, tester)
-- Coordinate their work through shared memory
-- Produce the final output
-
-**Option B: Interactive Swarm with Monitoring**
-
-For better visibility into the swarm's operation:
-
-1. Initialize the swarm manually:
-
-```bash
-# Initialize with mesh topology (agents can communicate freely)
+# Start fresh
 npx claude-flow@alpha swarm init --topology mesh --max-agents 6
 
-# Spawn specialized agents
+# Spawn specialized agents (record each spawn)
 npx claude-flow@alpha swarm spawn architect "System Designer"
-npx claude-flow@alpha swarm spawn coder "Frontend Developer"  
+npx claude-flow@alpha swarm spawn coder "Frontend Developer"
 npx claude-flow@alpha swarm spawn coder "Backend Developer"
 npx claude-flow@alpha swarm spawn tester "QA Engineer"
 npx claude-flow@alpha swarm spawn documenter "Documentation Writer"
 ```
 
-2. Monitor swarm status in a separate terminal:
+**Step 2: Monitor in second terminal**
 
 ```bash
-# Watch swarm activity in real-time
+# In separate terminal, capture status output
 npx claude-flow@alpha swarm status --watch
 ```
 
-3. Assign the task:
+**Step 3: Assign the task**
 
 ```bash
-npx claude-flow@alpha swarm task "Build a todo list web application" --strategy parallel --share-results
+npx claude-flow@alpha swarm task "Build a todo list web application with HTML, CSS, and vanilla JavaScript" --strategy parallel --share-results
 ```
 
-**Option C: Web UI Monitoring**
-
-For the best visualization of swarm coordination:
+**Step 4: Capture memory trail**
 
 ```bash
-# Launch with web interface
-npx claude-flow@alpha init --force --webui
-npx claude-flow@alpha start-ui
+# After completion, capture the memory log
+npx claude-flow@alpha memory list > memory-trail.log
 
-# Open http://localhost:3000 in your browser
+# Get stats
+npx claude-flow@alpha memory stats > memory-stats.log
 ```
 
-Then run swarm commands through the web terminal.
+**Step 5: Save all output files**
 
-### What to Watch For
+Copy the generated files to a backup directory:
+- `index.html`
+- `styles.css`
+- `app.js`
+- `tests/` directory
+- `README.md`
+- `memory-trail.log`
+- `memory-stats.log`
 
-- **Agent spawning**: Watch agents come online with specific roles
-- **Shared memory**: Agents write to and read from common memory store
-- **Self-organization**: The architect agent doesn't explicitly direct others—coordination emerges
-- **Task distribution**: Observe how work gets divided organically
-- **Memory queries**: Run `npx claude-flow@alpha memory list` to see what agents have stored
+### What to Capture
 
-### Observing Agent Memory
+**Required Artifacts:**
+| Artifact | Purpose |
+|----------|---------|
+| Terminal recording or screenshots | Show agent spawning and coordination |
+| `index.html`, `styles.css`, `app.js` | The actual output to show students |
+| `memory-trail.log` | Evidence of coordination via memory |
+| `memory-stats.log` | Summary statistics |
 
-The key to understanding swarm coordination is watching the shared memory:
+**Ideal Memory Trail Example:**
+```
+[12:01:15] architect → STORED: "architecture-decision"
+           Value: "Single-page app, vanilla JS, localStorage for persistence"
+
+[12:01:47] frontend → QUERIED: "architecture"
+           Found: architect's decision
+
+[12:02:03] frontend → STORED: "component-started"
+           Value: "Building header and input form"
+
+[12:02:15] backend → QUERIED: "architecture"
+           Found: architect's decision
+
+[12:02:31] backend → STORED: "component-started"
+           Value: "Building todo CRUD operations"
+
+[12:03:45] qa → QUERIED: "components"
+           Found: frontend and backend work
+
+[12:04:02] qa → STORED: "tests-written"
+           Value: "Unit tests for add/delete/toggle"
+```
+
+### Recording Tips
+
+1. **Run multiple times** — Pick the cleanest, most illustrative run
+2. **Watch for good examples** — Look for clear memory coordination patterns
+3. **Note timestamps** — Helps explain the sequence during walkthrough
+4. **Test the output** — Make sure the generated todo app actually works
+5. **Have backup** — If no clean run, create synthetic memory trail that illustrates concepts
+
+---
+
+## Live Session: Demo Walkthrough
+
+### Presenting the Pre-Recorded Demo (10 min)
+
+**Introduction (1 min)**
+"Unlike our previous demos, this one was pre-recorded. Swarm behavior is inherently unpredictable—that's its nature. Rather than wait for live execution, let's walk through what a successful run produced and understand how it happened."
+
+**Show the Task (1 min)**
+"We asked a swarm to build a todo list web application. No predefined workflow. Just spawn agents and let them figure it out."
+
+Show the agent configuration:
+```
+Agents Spawned:
+- Architect (System Designer)
+- Frontend Developer
+- Backend Developer
+- QA Engineer
+- Documentation Writer
+```
+
+**Show the Output (3 min)**
+Walk through each file:
+- `index.html` — Point out structure decisions
+- `styles.css` — Note styling choices
+- `app.js` — Highlight functionality
+- `README.md` — Show how documenter synthesized everything
+
+"Open the app in a browser if possible to show it works."
+
+**Show the Memory Trail (4 min)**
+This is the key teaching moment. Walk through the memory log:
+
+1. "Architect wrote the architecture decision first"
+2. "Frontend queried memory, found the architecture, decided to build UI"
+3. "Backend did the same independently—parallel work"
+4. "QA discovered new code by querying, wrote tests"
+5. "Nobody assigned these tasks. Each agent discovered useful work."
+
+**The Key Insight (1 min)**
+"In Section 2, our coordinator explicitly assigned Security, Performance, and Maintainability reviewers. Here, nobody told Frontend to build the header. It queried memory, saw what was needed, and acted. That's the fundamental difference—discovery versus assignment."
+
+### Contrast Table (Show on Screen)
+
+| Section 2 (Code Review) | Section 3 (Swarm) |
+|------------------------|-------------------|
+| Coordinator assigned reviewers | No assignment—agents claimed work |
+| Predefined roles | Roles discovered organically |
+| Coordinator synthesized | Synthesis emerged |
+| Predictable, auditable | Adaptive, exploratory |
+
+---
+
+## Optional: Live Demo (If Time Permits)
+
+If there's extra time and student interest, offer a brief live demonstration:
 
 ```bash
-# See all stored memories
-npx claude-flow@alpha memory list
-
-# Query for specific topics
-npx claude-flow@alpha memory query "todo" --recent
-
-# Check memory statistics
-npx claude-flow@alpha memory stats
+# Quick swarm demo (simpler task for reliability)
+npx claude-flow@alpha init --force
+npx claude-flow@alpha swarm "Summarize the key files in this directory" --claude
 ```
 
-### Understanding the Output
+**Set Expectations:**
+"This is live, so results may vary. That's the nature of emergent systems. If it works, great. If not, that's also a lesson about unpredictability."
 
-Claude Flow swarms use SQLite for shared memory. Each agent can:
-- **Store** discoveries and decisions for other agents
-- **Query** what other agents have learned
-- **Build on** previous agent work
+---
 
-This creates emergent coordination without explicit message passing.
+## Troubleshooting (For Recording)
 
-### Visualization: Swarm Topology
+### Common Issues During Recording
 
-The mesh topology allows any agent to communicate with any other:
+**claude-flow MCP connection fails:**
+```bash
+claude mcp remove claude-flow
+claude mcp add claude-flow npx claude-flow@alpha mcp start
+```
+
+**Swarm won't start:**
+```bash
+npx claude-flow@alpha memory init
+npx claude-flow@alpha swarm init --force
+```
+
+**Agents stuck:**
+```bash
+npx claude-flow@alpha swarm stop
+npx claude-flow@alpha swarm init --force
+```
+
+**Memory not persisting:**
+```bash
+npx claude-flow@alpha memory init
+```
+
+### Fallback: Create Illustrative Output
+
+If you cannot get a clean recording, create representative files manually that illustrate what a swarm would produce. The teaching value is in the memory trail pattern, not the specific code generated.
+
+---
+
+## Visualization: Swarm Topology
 
 ```
      ┌──────────────┐
@@ -522,9 +609,11 @@ The mesh topology allows any agent to communicate with any other:
      ┌──────────────┐
      │  Documenter  │
      └──────────────┘
+            │
+     [Shared Memory]
 ```
 
-All agents share the same memory store, enabling organic coordination.
+All agents share the same memory store, enabling organic coordination without explicit message passing.
 
 ---
 
