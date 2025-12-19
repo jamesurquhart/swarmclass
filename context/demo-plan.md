@@ -25,8 +25,8 @@ Before starting any demonstration, ensure you have:
 
 ## Demo 1: Research & Write Pipeline
 
-**Architecture:** Sequential Pipeline (Relay)  
-**Time:** 15-20 minutes  
+**Architecture:** Sequential Pipeline (Relay)
+**Time:** 15-20 minutes
 **What You'll Build:** A two-agent system where a Researcher agent gathers information and a Writer agent synthesizes it into a document.
 
 ### Learning Objectives
@@ -35,24 +35,75 @@ Before starting any demonstration, ensure you have:
 - See how agents hand off work in a sequential pipeline
 - Observe the efficiency gains from task specialization
 
-### Setup
+---
 
-1. Create a new project directory:
+## Pre-Demo Verification
+
+Before starting, verify your environment is ready:
 
 ```bash
+# Check Node.js version (must be 18+)
+node --version
+
+# Check Claude Code is installed
+claude --version
+
+# Check API key is set (should show sk-ant-...)
+echo $ANTHROPIC_API_KEY | head -c 10
+```
+
+**Expected output:**
+```
+v20.x.x (or higher)
+Claude Code vX.X.X
+sk-ant-api
+```
+
+If any check fails, see Troubleshooting section below.
+
+---
+
+## Setup (5 minutes)
+
+### Step 1: Create Project Directory
+
+```bash
+# Create and enter project directory
 mkdir demo-research-write
 cd demo-research-write
-```
 
-2. Initialize Claude Code and create the subagent definitions:
-
-```bash
+# Create the agents directory
 mkdir -p .claude/agents
+
+# Verify structure
+ls -la .claude/
 ```
 
-3. Create the Researcher subagent (`.claude/agents/researcher.md`):
+**Expected output:**
+```
+total 0
+drwxr-xr-x  3 user  staff   96 Dec 19 10:00 .
+drwxr-xr-x  3 user  staff   96 Dec 19 10:00 ..
+drwxr-xr-x  2 user  staff   64 Dec 19 10:00 agents
+```
 
-```markdown
+### Step 2: Create the Researcher Agent
+
+Create the file `.claude/agents/researcher.md` with the following content:
+
+**Option A: Using a text editor**
+```bash
+# Open in your preferred editor
+code .claude/agents/researcher.md   # VS Code
+# OR
+nano .claude/agents/researcher.md   # Terminal editor
+# OR
+open -e .claude/agents/researcher.md # macOS TextEdit
+```
+
+**Option B: Using cat (copy-paste this entire block)**
+```bash
+cat > .claude/agents/researcher.md << 'EOF'
 ---
 name: researcher
 description: Use this agent to research topics, gather information, and compile findings. Invoke when you need comprehensive background research before writing or analysis.
@@ -74,11 +125,21 @@ Always structure your findings as:
 - **Gaps**: What information is still missing
 
 Be thorough but focused. Quality over quantity.
+EOF
 ```
 
-4. Create the Writer subagent (`.claude/agents/writer.md`):
+**Verify the file was created:**
+```bash
+cat .claude/agents/researcher.md
+```
 
-```markdown
+### Step 3: Create the Writer Agent
+
+Create the file `.claude/agents/writer.md`:
+
+**Using cat (copy-paste this entire block)**
+```bash
+cat > .claude/agents/writer.md << 'EOF'
 ---
 name: writer
 description: Use this agent to transform research and notes into polished written content. Invoke after research is complete and you need to produce a final document.
@@ -100,11 +161,56 @@ You are a Writing Specialist. Your role is to:
 
 ## Output
 Produce publication-ready content. Include a brief note about any areas where additional research might strengthen the piece.
+EOF
 ```
 
-### Running the Demo
+**Verify the file was created:**
+```bash
+cat .claude/agents/writer.md
+```
 
-Launch Claude Code and use this prompt to trigger the pipeline:
+### Step 4: Verify Setup
+
+```bash
+# List all agent files
+ls -la .claude/agents/
+
+# Should show:
+# researcher.md
+# writer.md
+```
+
+**Your directory structure should now be:**
+```
+demo-research-write/
+└── .claude/
+    └── agents/
+        ├── researcher.md
+        └── writer.md
+```
+
+---
+
+## Running the Demo (10-15 minutes)
+
+### Step 5: Launch Claude Code
+
+```bash
+# Launch Claude Code in the project directory
+claude
+```
+
+**You should see:**
+```
+╭─────────────────────────────────────────╮
+│ Claude Code                             │
+│ Type your message...                    │
+╰─────────────────────────────────────────╯
+```
+
+### Step 6: Enter the Prompt
+
+Copy and paste this exact prompt into Claude Code:
 
 ```
 I need a 500-word briefing on "the current state of quantum computing for business applications."
@@ -114,20 +220,150 @@ Use the researcher subagent to gather current information about quantum computin
 Work in sequence: complete research first, save findings to research-notes.md, then have the writer transform those notes into the final briefing.md document.
 ```
 
-### What to Watch For
+Press Enter to submit.
 
-- **Context isolation**: Notice how each subagent works in its own context window
-- **Handoff mechanism**: The research notes file acts as the interface between agents
-- **Specialization**: Each agent focuses on its specific task without distraction
-- **Output in Task()**: Look for `Task(Performing research...)` in the terminal output
+### What You'll See During Execution
 
-### Variation (3-Agent Pipeline)
+**Phase 1: Research Agent Spawns**
+```
+⏳ Task: Performing research on quantum computing...
+```
+The researcher agent will:
+- Search for information using WebSearch
+- Fetch relevant pages using WebFetch
+- Compile findings
+
+**Phase 2: Handoff via File**
+```
+✓ Created research-notes.md
+```
+The research notes file is created—this is the handoff mechanism.
+
+**Phase 3: Writer Agent Spawns**
+```
+⏳ Task: Writing executive briefing...
+```
+The writer agent will:
+- Read the research-notes.md file
+- Transform it into polished prose
+- Create the final briefing
+
+**Phase 4: Completion**
+```
+✓ Created briefing.md
+```
+
+---
+
+## Reading the Results
+
+### Step 7: View the Output Files
+
+After the demo completes, examine the output:
+
+```bash
+# List files created
+ls -la
+
+# View the research notes (intermediate output)
+cat research-notes.md
+
+# View the final briefing (final output)
+cat briefing.md
+```
+
+### Expected Output Structure
+
+**research-notes.md** should contain:
+- Key Facts section with bullet points
+- Context section with background
+- Sources section listing where info came from
+- Gaps section noting missing information
+
+**briefing.md** should contain:
+- ~500 words of polished prose
+- Executive-friendly language
+- Structured sections (intro, body, conclusion)
+- Note about areas for additional research
+
+### Discussion Points
+
+After viewing the output, discuss:
+
+1. **Context Isolation**: Each agent worked independently. The researcher didn't know a writer would follow.
+
+2. **File-Based Handoff**: The `research-notes.md` file was the interface between agents. This is explicit, auditable, and debuggable.
+
+3. **Specialization**: The researcher focused purely on gathering information. The writer focused purely on prose. Neither was distracted by the other's concerns.
+
+4. **Tool Restrictions**: Notice the researcher had `WebSearch, WebFetch` but the writer did not. The writer had `Write, Edit` while the researcher did not write the final document.
+
+---
+
+## Troubleshooting
+
+### "claude: command not found"
+
+Claude Code is not installed or not in PATH:
+```bash
+# Install Claude Code
+npm install -g @anthropic-ai/claude-code
+
+# Verify installation
+which claude
+```
+
+### "API key not set" or authentication errors
+
+```bash
+# Set your API key
+export ANTHROPIC_API_KEY=sk-ant-your-key-here
+
+# Add to shell profile for persistence
+echo 'export ANTHROPIC_API_KEY=sk-ant-your-key-here' >> ~/.zshrc
+source ~/.zshrc
+```
+
+### Agents not recognized
+
+If Claude doesn't recognize the subagents:
+```bash
+# Verify file locations
+ls -la .claude/agents/
+
+# Check file contents (look for YAML frontmatter)
+head -5 .claude/agents/researcher.md
+
+# Should show:
+# ---
+# name: researcher
+# description: ...
+```
+
+Ensure the files have the correct YAML frontmatter (the `---` delimited section at the top).
+
+### Demo runs but no files created
+
+If the agents run but don't create output files:
+1. Check that you're in the correct directory
+2. Look for errors in Claude Code output
+3. Try a simpler prompt: "Use the researcher subagent to find 3 facts about quantum computing and save them to notes.md"
+
+### Demo takes too long
+
+If the demo exceeds 20 minutes:
+- The researcher may be doing extensive web searches
+- Network latency can slow WebFetch operations
+- Consider using a simpler topic for time-constrained demos
+
+---
+
+## Variation: 3-Agent Pipeline (Optional)
 
 Add a third agent for editing/fact-checking:
 
-Create `.claude/agents/editor.md`:
-
-```markdown
+```bash
+cat > .claude/agents/editor.md << 'EOF'
 ---
 name: editor
 description: Use this agent for final review, fact-checking, and polish of written content before publication.
@@ -141,9 +377,35 @@ You are an Editorial Specialist. Review content for:
 - Logical flow and structure
 
 Provide specific edits, not general suggestions.
+EOF
 ```
 
-Then modify your prompt to include the editing pass.
+**Modified prompt for 3-agent pipeline:**
+```
+I need a 500-word briefing on "the current state of quantum computing for business applications."
+
+Work in sequence:
+1. Use the researcher subagent to gather information, save to research-notes.md
+2. Use the writer subagent to create a draft briefing, save to briefing-draft.md
+3. Use the editor subagent to review and polish the draft, save final version to briefing.md
+```
+
+---
+
+## Cleanup
+
+After the demo, you can clean up:
+
+```bash
+# Exit Claude Code
+# Press Ctrl+C or type /exit
+
+# Remove demo files (optional)
+cd ..
+rm -rf demo-research-write
+```
+
+Or keep the directory to reference the agent definitions later.
 
 ---
 
