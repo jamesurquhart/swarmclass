@@ -1,0 +1,19 @@
+# Slide decks (too large for GitHub)
+*.pptx
+*.ppt
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# Node modules (if any demos use npm)
+node_modules/
+
+# Environment files
+.env
+.env.local
