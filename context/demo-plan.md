@@ -47,17 +47,28 @@ node --version
 
 # Check Claude Code is installed
 claude --version
-
-# Check API key is set (should show sk-ant-...)
-echo $ANTHROPIC_API_KEY | head -c 10
 ```
 
 **Expected output:**
 ```
 v20.x.x (or higher)
 Claude Code vX.X.X
-sk-ant-api
 ```
+
+**Verify Claude Code authentication:**
+
+Claude Code can authenticate in multiple ways. Run this to verify you're authenticated:
+
+```bash
+# Quick test - should respond without auth errors
+claude --print "Say hello"
+```
+
+If you see "Hello!" or similar response, authentication is working.
+
+If you get an authentication error:
+- **Option A (API Key):** `export ANTHROPIC_API_KEY=sk-ant-your-key`
+- **Option B (OAuth):** Run `claude` and follow the login prompts
 
 If any check fails, see Troubleshooting section below.
 
