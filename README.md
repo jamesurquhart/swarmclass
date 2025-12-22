@@ -1,6 +1,6 @@
 # Developing with AI Agent Swarms
 
-**O'Reilly Live Course: Agentic software development with claude-flow**
+**O'Reilly Live Course: Agentic software development with claude-code and claude-flow**
 
 A 3-hour intermediate-level workshop exploring multi-agent AI systems and swarm-based software development patterns.
 
