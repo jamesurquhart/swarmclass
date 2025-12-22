@@ -19,9 +19,9 @@
 - **Section 3**: Decision framework for choosing architectures, emergent coordination, best practices; Demo 3 walkthrough
 
 ### Course Objectives
-- Understand what differentiates AI swarms from linear AI developer workflows
-- Understand the patterns in parallel AI software development approaches
-- Install and run a first prompt with claude-flow
+- Understand how swarms differ from structured multi-agent orchestration
+- Know six architectural patterns and when to choose swarms over other approaches
+- Build multi-agent systems and see swarm coordination in action with claude-flow
 
 ---
 

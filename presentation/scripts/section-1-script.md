@@ -54,23 +54,24 @@ Section 3: Applying Multi-Agent Patterns (60 min)
 ```
 By the end of this course, you will:
 
-• Understand what differentiates AI swarms from
-  linear AI developer workflows
+• Understand how swarms differ from structured
+  multi-agent orchestration
 
-• Know the patterns in parallel AI software development
-  and where to apply each one
+• Know six architectural patterns and when to
+  choose swarms over other approaches
 
-• Have installed and run a first prompt with claude-flow
+• Build multi-agent systems and see swarm
+  coordination in action with claude-flow
 ```
 
 **Script:**
 > Three objectives for today.
 >
-> First, you'll understand what makes swarms different from just asking Claude to do multiple things in sequence.
+> First, you'll understand what makes swarms different—not just from single-agent workflows, but from the structured multi-agent patterns we'll build first. Swarms are about emergent coordination, and that distinction matters.
 >
-> Second, you'll have a mental map of the different multi-agent patterns—hierarchical, debate, pipeline, swarm—and when each one makes sense.
+> Second, you'll have a mental map of six architectural patterns—pipeline, hierarchical, debate, committee, routing, and swarm—and a framework for knowing when swarms are the right choice versus when you need more structure.
 >
-> Third, you'll leave with working code. We'll install claude-flow and run real multi-agent prompts together.
+> Third, you'll get hands-on experience. We'll build multi-agent systems using Claude Code, and you'll see swarm coordination in action with claude-flow.
 >
 > Quick logistics: use the Q&A widget for questions—I'll address them at natural break points. The GitHub repo link is in the resources panel if you want to follow along with code.
 
