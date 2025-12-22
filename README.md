@@ -22,9 +22,9 @@ If agentic AI is changing the way we build software, then agent swarms are reima
 
 | Section | Duration | Focus |
 |---------|----------|-------|
-| Section 1: Agentic AI and Swarm Basics | 60 min | Concepts, terminology, six architectures |
-| Section 2: Swarm Instantiation and Exploration | 60 min | Hands-on with Claude Code and claude-flow |
-| Section 3: Best Practices for Using Swarms | 60 min | When to use (and NOT use) swarms |
+| Section 1: Agentic AI and Swarm Basics | 60 min | Concepts, terminology, six architectures; Demo 1 (Sequential Pipeline) |
+| Section 2: Creating Advanced Multi-Agent Systems | 60 min | Deep dives on Hierarchical, Debate, Committee, Routing; Demo 2 (Code Review) |
+| Section 3: Applying Multi-Agent Patterns | 60 min | Decision framework, emergent coordination, best practices; Demo 3 (Swarm walkthrough) |
 
 ## Six Multi-Agent Architectures Covered
 

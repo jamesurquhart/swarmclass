@@ -26,23 +26,26 @@ James Urquhart
 **Visual:** Three-section breakdown with timing
 ```
 Section 1: Agentic AI and Swarm Basics (60 min)
-  → Concepts, terminology, architectures
+  → Concepts, terminology, six architectures
+  → Demo: Sequential Pipeline (Research & Write)
 
-Section 2: Swarm Instantiation and Exploration (60 min)
-  → Hands-on with Claude Code and claude-flow
+Section 2: Creating Advanced Multi-Agent Systems (60 min)
+  → Deep dives: Hierarchical, Debate, Committee, Routing
+  → Demo: Multi-Agent Code Review
 
-Section 3: Best Practices for Using Swarms (60 min)
-  → When to use (and NOT use) swarms
+Section 3: Applying Multi-Agent Patterns (60 min)
+  → Decision framework, emergent coordination, best practices
+  → Demo: Self-Organizing Swarm walkthrough
 ```
 
 **Script:**
 > Here's how we'll spend our time together.
 >
-> In Section 1—where we are now—I'll give you the conceptual foundation. We'll define what multi-agent AI actually means, walk through the key terminology, and survey six architectural patterns you'll encounter in the wild.
+> In Section 1—where we are now—I'll give you the conceptual foundation. We'll define what multi-agent AI actually means, walk through the key terminology, and survey six architectural patterns. We'll also build our first multi-agent system: a research-to-writing pipeline.
 >
-> Section 2 is hands-on. We'll build multi-agent systems using Claude Code's subagent capabilities and then move to claude-flow for true swarm orchestration.
+> Section 2 goes deep on structured orchestration. We'll implement hierarchical patterns, add debate and committee elements, and build a multi-agent code review system with three specialized reviewers.
 >
-> Section 3 is about judgment—knowing when these tools help and when they'll hurt you. Swarms aren't magic, and using them badly is worse than not using them at all.
+> Section 3 brings it all together. We'll look at emergent coordination with swarms, walk through a pre-recorded demo, and most importantly—build a decision framework for knowing which pattern to use when. That's the skill that transfers across tools and platforms.
 
 ---
 

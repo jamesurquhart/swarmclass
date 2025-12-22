@@ -14,9 +14,9 @@
 - GitHub repo available for download
 
 ### What We'll Cover Today
-- **Section 1** (this section): Concepts, terminology, architectures
-- **Section 2**: Hands-on with Claude Code agents and claude-flow
-- **Section 3**: Best practices and when NOT to use swarms
+- **Section 1** (this section): Concepts, terminology, six architectures, Demo 1 (Sequential Pipeline)
+- **Section 2**: Deep dives on Hierarchical, Debate, Committee, Routing patterns; Demo 2 (Code Review)
+- **Section 3**: Decision framework for choosing architectures, emergent coordination, best practices; Demo 3 walkthrough
 
 ### Course Objectives
 - Understand what differentiates AI swarms from linear AI developer workflows
