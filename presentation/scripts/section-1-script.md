@@ -638,8 +638,9 @@ How do they share information?
    [A] → file.md → [B]
 
 2. Return Value
-   [Orchestrator] ← result ← [A]
-                 → passes → [B]
+   [A] ── spawns ─→ [B]
+       ←── result ──┘
+   (A may be an orchestrator, another agent, or the main session)
 
 3. Shared Memory
    [A] → [Memory] ← [B]
@@ -654,7 +655,7 @@ How do they share information?
 >
 > **File-Based**—what our demo uses. Agent A writes to a file, Agent B reads it. Simple, debuggable, creates persistent artifacts.
 >
-> **Return Value**—agent returns results to an orchestrator, who passes relevant parts to the next agent. The orchestrator can filter and transform.
+> **Return Value**—a parent spawns a subagent and receives its result directly. The parent could be an orchestrator coordinating multiple agents, another agent in a chain, or just your main Claude session. Either way, it receives the result and decides what to do next.
 >
 > **Shared Memory**—all agents read and write to a common store. They discover each other's work asynchronously. This is what swarms use.
 >
@@ -668,7 +669,7 @@ How do they share information?
 Pattern         Coupling  Debug  Parallel  Use When
 ──────────────────────────────────────────────────────
 File-Based      Loose     High   No        Clear phases
-Return Value    Medium    High   No        Central control
+Return Value    Medium    High   No        Parent-child flow
 Shared Memory   Loose     Med    Yes       Swarms
 Message Passing Tight     Low    Yes       Real-time
 ```
@@ -678,7 +679,7 @@ Message Passing Tight     Low    Yes       Real-time
 >
 > File-based gives you loose coupling and high debuggability—just read the file to see what was passed. But it's sequential.
 >
-> Return value is similar but gives the orchestrator control to transform between agents.
+> Return value is similar but keeps the parent in control—it receives the result and decides what to do next.
 >
 > Shared memory enables parallelism—multiple agents working simultaneously, reading each other's outputs. But it's harder to debug because timing matters.
 >

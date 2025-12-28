@@ -262,13 +262,16 @@ But it creates a challenge: **How do agents share information?**
 
 #### Pattern 2: Return Value Handoff
 ```
-[Orchestrator] --spawns--> [Agent A] --returns--> [Orchestrator] --passes to--> [Agent B]
+[Parent] ── spawns ─→ [Child]
+         ←── result ──┘
+(Parent may be an orchestrator, another agent, or the main session)
 ```
-- Agent returns result to orchestrator
-- Orchestrator passes relevant parts to next agent
-- **Pros:** Orchestrator can filter/transform between agents
-- **Cons:** Orchestrator becomes bottleneck
-- **Best for:** Hierarchical architectures
+- Parent spawns subagent and receives result directly
+- Parent could be an orchestrator, another agent in a chain, or the main session
+- Parent decides what to do with result—use it, transform it, pass it along
+- **Pros:** Parent stays in control, can filter/transform results
+- **Cons:** Sequential, parent must wait for child
+- **Best for:** Parent-child workflows, when caller needs the result
 
 #### Pattern 3: Shared Memory / Blackboard
 ```
@@ -296,7 +299,7 @@ But it creates a challenge: **How do agents share information?**
 | Pattern | Coupling | Debuggability | Parallelism | Use When |
 |---------|----------|---------------|-------------|----------|
 | File-Based | Loose | High | Sequential | Clear phases, need artifacts |
-| Return Value | Medium | High | Sequential | Central coordination needed |
+| Return Value | Medium | High | Sequential | Parent-child flow, caller needs result |
 | Shared Memory | Loose | Medium | High | Swarms, emergent behavior |
 | Message Passing | Tight | Low | High | Real-time, conversational |
 
