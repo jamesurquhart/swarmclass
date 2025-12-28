@@ -647,7 +647,8 @@ How do they share information?
    [C] →    ↕    ← [D]
 
 4. Message Passing
-   [A] ←messages→ [B]
+   [A] ←→ [Broker] ←→ [B]
+   (requires external infrastructure—not native to Claude Code)
 ```
 
 **Script:**
@@ -659,7 +660,7 @@ How do they share information?
 >
 > **Shared Memory**—all agents read and write to a common store. They discover each other's work asynchronously. This is what swarms use.
 >
-> **Message Passing**—direct communication between agents. Real-time, low latency, but complex routing.
+> **Message Passing**—direct real-time communication between agents. This one's different: Claude Code doesn't support it natively. Agents run, complete, and return—they don't sit listening for messages from peers. To implement this, you'd need external infrastructure: a message broker like Redis pub/sub or RabbitMQ, WebSockets, or an MCP server that provides messaging. Frameworks like AutoGen use this pattern. It's powerful for real-time systems, but adds complexity.
 
 ---
 
@@ -671,7 +672,9 @@ Pattern         Coupling  Debug  Parallel  Use When
 File-Based      Loose     High   No        Clear phases
 Return Value    Medium    High   No        Parent-child flow
 Shared Memory   Loose     Med    Yes       Swarms
-Message Passing Tight     Low    Yes       Real-time
+Message Passing Tight     Low    Yes       Real-time*
+
+* Requires external infrastructure
 ```
 
 **Script:**
@@ -683,7 +686,7 @@ Message Passing Tight     Low    Yes       Real-time
 >
 > Shared memory enables parallelism—multiple agents working simultaneously, reading each other's outputs. But it's harder to debug because timing matters.
 >
-> Message passing is for real-time systems where agents need to react to each other immediately.
+> Message passing—note the asterisk—requires infrastructure beyond Claude Code. But if you need agents reacting to each other in real-time, it's worth the complexity.
 
 ---
 

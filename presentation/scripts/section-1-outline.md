@@ -286,13 +286,16 @@ But it creates a challenge: **How do agents share information?**
 
 #### Pattern 4: Direct Message Passing
 ```
-[Agent A] <--messages--> [Agent B]
+[Agent A] ←→ [Broker] ←→ [Agent B]
+(requires external infrastructure—not native to Claude Code)
 ```
-- Agents send messages directly to each other
-- Often via API calls or event streams
+- Agents send messages directly to each other in real-time
+- **Not native to Claude Code**—agents run, complete, return; they don't listen for messages
+- Requires external infrastructure: message broker (Redis pub/sub, RabbitMQ), WebSockets, or MCP server
+- Used by frameworks like AutoGen
 - **Pros:** Real-time, low latency
-- **Cons:** Complex routing, tight coupling
-- **Best for:** Debate architectures, real-time systems
+- **Cons:** Complex routing, tight coupling, additional infrastructure
+- **Best for:** Real-time systems where agents need to react to each other immediately
 
 ### Summary: Choosing a Handoff Pattern
 
@@ -301,7 +304,7 @@ But it creates a challenge: **How do agents share information?**
 | File-Based | Loose | High | Sequential | Clear phases, need artifacts |
 | Return Value | Medium | High | Sequential | Parent-child flow, caller needs result |
 | Shared Memory | Loose | Medium | High | Swarms, emergent behavior |
-| Message Passing | Tight | Low | High | Real-time, conversational |
+| Message Passing | Tight | Low | High | Real-time (requires external infra) |
 
 ### Our Demo: File-Based Handoff in Action
 
