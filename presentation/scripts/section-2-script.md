@@ -677,7 +677,7 @@ node review-system.js sample.js
 ## 2.7 Deep Dive: Committee Pattern (5 min)
 
 ### SLIDE 45: Committee Pattern
-**Visual:** Committee architecture with aggregation strategies
+**Visual:** Committee architecture with annotations
 ```
 Committee Pattern: Parallel Independence
 
@@ -685,23 +685,41 @@ Committee Pattern: Parallel Independence
        ──→ [Agent 2] ──→ [Aggregator] ──→ [Output]
        ──→ [Agent 3] ──→
 
-Aggregation Strategies:
-─────────────────────────────────────────────────
-Majority Vote     Classification tasks
-Average           Numeric outputs (scoring)
-Unanimous         High-stakes safety checks
-Synthesis         Complex outputs (our demo)
-Confidence-Weight Varying expertise levels
+• Same input fans out to all agents
+• Independent execution (agents don't see each other's work)
+• Aggregator combines all results
+• Diverse perspectives catch what individuals miss
 ```
 
 **Script:**
 > The Committee pattern—multiple agents processing the same input independently, then aggregating results.
 >
-> Our demo is actually a hybrid. The parallel reviewers are a Committee. The coordinator synthesizes like an Aggregator. But we added Hierarchical control and Debate for disagreements.
+> Four key features. First, the same input fans out to all agents—they're all looking at the same thing. Second, execution is independent—no agent sees what others are doing. Third, an aggregator combines results at the end. Fourth, diverse perspectives catch what any single agent would miss.
 >
-> **Aggregation strategies matter**. Majority vote for classification—is this spam or not? Averaging for scores. Unanimous agreement for safety-critical decisions—all agents must agree before proceeding. Synthesis for complex outputs where you can't just vote.
+> Our code review demo is actually a hybrid. The parallel reviewers are a Committee. But we added Hierarchical control for the coordinator and Debate for surfacing disagreements.
+
+---
+
+### SLIDE 45a: Aggregation Strategies
+**Visual:** Aggregation strategies table
+```
+How do you combine committee results?
+
+Strategy            Use When
+─────────────────────────────────────────────────
+Majority Vote       Classification (spam or not?)
+Average             Numeric outputs, scoring
+Unanimous           Safety-critical decisions
+Synthesis           Complex outputs (our demo)
+Confidence-Weight   Agents have varying expertise
+```
+
+**Script:**
+> How you aggregate matters as much as what you aggregate.
 >
-> The key principle: diverse perspectives catch what individuals miss. But diversity must be genuine—running the same prompt three times doesn't help.
+> **Majority vote** for classification—three agents say spam, two say not spam, it's spam. **Averaging** for numeric outputs like scores or ratings. **Unanimous agreement** for safety-critical decisions—all agents must agree before proceeding. **Synthesis** for complex outputs where you can't just vote—our code review uses this. **Confidence-weighted** when some agents have more expertise than others.
+>
+> The key principle: diversity must be genuine. Running the same prompt three times doesn't help. Different perspectives, different prompts, different focus areas.
 
 ---
 
