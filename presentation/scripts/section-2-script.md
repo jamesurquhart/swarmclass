@@ -52,29 +52,32 @@ Three agents • File-based handoff • Sequential execution
 
 ---
 
-### SLIDE 30: Section 2 Roadmap
-**Visual:** Module list with timing
+### SLIDE 30: Section 2 Overview
+**Visual:** Key topics as bullet points
 ```
-Section 2 Roadmap
+In this section, you will learn:
 
-• Anthropic's Agent Support in Depth (10 min)
-• Deep Dive: Hierarchical Pattern (8 min)
-• Demo Setup: Code Review System (8 min)
-• Deep Dive: Debate Pattern (7 min)
-• Demo: Run and Analyze (10 min)
-• Deep Dive: Committee Pattern (5 min)
-• Brief: Dynamic Routing (5 min)
-• Results and Wrap-up (7 min)
+• How Claude Code's Task tool spawns and
+  manages subagents
+
+• Four structured orchestration patterns:
+  Hierarchical, Debate, Committee, and Routing
+
+• How to define agents with specific tools
+  and focused responsibilities
+
+• Hands-on: Build a multi-agent code review
+  system combining multiple patterns
 ```
 
 **Script:**
-> Here's our roadmap.
+> Here's what we're covering in this section.
 >
-> We'll start with Anthropic's agent support in depth—how Claude Code's Task tool works, how to define agents, and how to control tool access.
+> First, we'll go deep on Anthropic's agent support—how the Task tool actually works, how to define custom agents, and how tool restrictions enforce specialization.
 >
-> Then we'll do deep dives on three patterns: Hierarchical, Debate, and Committee. Each with implementation guidance and real-world use cases.
+> Then we'll explore four orchestration patterns: Hierarchical for manager-worker relationships, Debate for adversarial review, Committee for parallel perspectives, and Routing for directing queries to specialists.
 >
-> Interleaved with that, we'll build and run a multi-agent code review system that combines all three patterns.
+> And we'll build something real—a multi-agent code review system with security, performance, and maintainability reviewers working together.
 >
 > Let's get into it.
 
@@ -246,30 +249,34 @@ WebFetch                      RAG Retrieval
 
 ---
 
-### SLIDE 36: Real-World Application
-**Visual:** Content pipeline diagram
+### SLIDE 36: Real-World Applications
+**Visual:** Two example pipelines
 ```
-Real-World: Content Pipeline at Scale
+Real-World: Content Pipeline
+[Input] → [Researcher] → [Drafter] → [Editor] → [Output]
+              │              │           │
+          Web tools     Read/Write   Read/Edit
 
-[Input] → [Researcher] → [Drafter] → [Editor] → [Fact-Checker] → [Formatter] → [Output]
-              │              │           │            │              │
-          Web tools     Read/Write   Read/Edit    Read/Web       Read/Write
-          Read-only                  Read-only    Read-only
+Real-World: Customer Analysis Pipeline
+[Query] → [Data Agent] → [Analyzer] → [Reporter] → [Output]
+               │              │            │
+           MCP:Postgres    Read-only   Read/Write
+           (read-only)
 
-Publishing companies using this pattern:
-• Each stage has different tool access
-• Handoffs via structured documents
+Key principles:
+• Each agent gets only the tools it needs
+• Database access via MCP with minimal permissions
 • Failures isolated to single stage
 ```
 
 **Script:**
-> Here's a real-world example: content pipelines at publishing companies.
+> Two real-world examples showing how tool restrictions work in practice.
 >
-> A researcher gathers information—web tools, read-only. A drafter writes the first version—read and write. An editor refines—can edit but not research. A fact-checker verifies claims—web access to check sources, but can't modify the document. A formatter prepares for publication.
+> First, a content pipeline. Researcher has web tools but can't modify files. Drafter can read and write. Editor can refine but not research. Each stage is isolated.
 >
-> Each stage has exactly the tools it needs. Handoffs happen via structured documents. If the fact-checker fails, you don't lose the draft—failures are isolated.
+> Second, a customer analysis pipeline. The Data Agent connects to Postgres via MCP—but with read-only access. It can't modify production data. The Analyzer processes the data but can't access the database directly. The Reporter writes the final output.
 >
-> This same pattern works for any multi-stage content process.
+> Notice the pattern: database access happens through MCP with minimal permissions. The agent that queries data isn't the same agent that writes reports. Separation of concerns, enforced by tool restrictions.
 
 ---
 
