@@ -112,7 +112,61 @@ Quick clarification: The Agentics Foundation is different from the AAIF—the Ag
 
 ---
 
-### Slide 59: How Swarms Coordinate
+### Slide 59: claude-flow Architecture
+**Visual:** Block diagram showing key components and their relationships
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                      claude-flow Architecture                    │
+└─────────────────────────────────────────────────────────────────┘
+
+                 ┌─────────────────────────────────┐
+                 │        Swarm Orchestrator       │
+                 │  • Agent lifecycle (spawn/stop) │
+                 │  • Task distribution            │
+                 │  • Topology management          │
+                 └────────────────┬────────────────┘
+                                  │
+          ┌───────────────────────┼───────────────────────┐
+          │                       │                       │
+          ▼                       ▼                       ▼
+   ┌─────────────┐         ┌─────────────┐         ┌─────────────┐
+   │ Claude Code │         │ Claude Code │         │ Claude Code │
+   │   Agent 1   │         │   Agent 2   │         │   Agent N   │
+   │ (Architect) │         │ (Developer) │         │    (QA)     │
+   └─────────────┘         └─────────────┘         └─────────────┘
+          │                       │                       │
+          └───────────────────────┼───────────────────────┘
+                    ┌─────────────┴─────────────┐
+                    │                           │
+                    ▼                           ▼
+   ┌────────────────────────────┐   ┌────────────────────────────┐
+   │    Shared Memory System    │   │        MCP Servers         │
+   │                            │   │                            │
+   │  STORE · QUERY · EVENTS    │   │   File I/O · Web Search    │
+   │                            │   │   External APIs · Tools    │
+   │   (Agent Coordination)     │   │   (World Interaction)      │
+   │                            │   │                            │
+   │   .claude-flow/memory/     │   │                            │
+   └────────────────────────────┘   └────────────────────────────┘
+```
+
+**Script:**
+"Before we see coordination in action, let's look at the architecture that makes it possible.
+
+At the top is the **Swarm Orchestrator**. This manages agent lifecycle—spawning agents, monitoring their status, and managing the swarm topology. It's the entry point, but it's not a coordinator in the hierarchical sense. It doesn't assign tasks to agents.
+
+Below that are the **Claude Code agents** themselves. Each agent is a full Claude Code instance with its own context window and specialized role. They run in parallel, independently.
+
+The key component is the **Shared Memory System**. This is where emergence happens. Agents STORE discoveries, decisions, and artifacts. Other agents QUERY memory to find context and discover work. The memory system lives in `.claude-flow/memory/` and persists across the swarm's execution.
+
+On the other side, **MCP Servers** provide tool access—file operations, web search, external APIs. Each agent connects to MCP for interacting with the outside world.
+
+The critical insight: there's no message bus between agents. No direct communication. All coordination happens through shared memory. This is what enables emergent behavior—agents discover work rather than being assigned it."
+
+---
+
+### Slide 60: How Swarms Coordinate
 **Visual:** Numbered flow with shared memory at center
 
 ```
@@ -149,7 +203,7 @@ Results accumulate. The documenter eventually queries memory, sees all the compo
 
 ## Module 3.3: Demo Walkthrough — What a Swarm Built (10 min)
 
-### Slide 60: Demo 3 — The Task
+### Slide 61: Demo 3 — The Task
 **Visual:** Task description and agent list
 
 ```
@@ -178,7 +232,7 @@ No workflow was predefined. We just said 'build a todo app' and let the agents f
 
 ---
 
-### Slide 61: The Output — Files Created
+### Slide 62: The Output — Files Created
 **Visual:** File tree with descriptions
 
 ```
@@ -208,7 +262,7 @@ This actually works. You can open it in a browser and use it."
 
 ---
 
-### Slide 62: The Memory Trail
+### Slide 63: The Memory Trail
 **Visual:** Timeline of memory operations
 
 ```
@@ -251,7 +305,7 @@ This is emergence. Coordination from local decisions, not central control."
 
 ---
 
-### Slide 63: The Key Insight
+### Slide 64: The Key Insight
 **Visual:** Comparison quote
 
 ```
@@ -277,7 +331,7 @@ Both approaches produce working results. The question is which fits your problem
 
 ---
 
-### Slide 64: Section 2 vs. Section 3 Comparison
+### Slide 65: Section 2 vs. Section 3 Comparison
 **Visual:** Comparison table
 
 ```
@@ -310,7 +364,7 @@ Again, neither is better. They solve different problems. Now let's talk about ho
 
 ## Module 3.4: Decision Framework — Choosing Your Architecture (15 min)
 
-### Slide 65: The Central Question
+### Slide 66: The Central Question
 **Visual:** Large question with context
 
 ```
@@ -335,7 +389,7 @@ Let's build a decision framework around these."
 
 ---
 
-### Slide 66: Decision Tree
+### Slide 67: Decision Tree
 **Visual:** Flowchart
 
 ```
@@ -373,7 +427,7 @@ This is simplified. Let's go deeper."
 
 ---
 
-### Slide 67: Pattern Selection Guide
+### Slide 68: Pattern Selection Guide
 **Visual:** Detailed table
 
 ```
@@ -419,7 +473,7 @@ Swarm: best for exploratory, ill-defined tasks. Avoid when you need predictabili
 
 ---
 
-### Slide 68: Decision Criteria Deep Dive
+### Slide 69: Decision Criteria Deep Dive
 **Visual:** Four criteria tables
 
 ```
@@ -453,52 +507,6 @@ Predictability: If you need an audit trail or reproducibility—regulatory conte
 Time and cost: If you need to minimize latency, pipeline or routing—single execution path. If you need to minimize cost, single agent or simple pipeline. If thoroughness matters more than efficiency, committee or swarm.
 
 Quality: If you need to catch all issues, committee—multiple reviewers. If you need to challenge assumptions, debate. If you need comprehensive coverage of an unknown space, swarm."
-
----
-
-### Slide 69: Real-World Mapping
-**Visual:** Task-to-pattern mapping table
-
-```
-Real-World Task Mapping:
-
-┌──────────────────────────────┬─────────────────────┬─────────────────┐
-│ Task                         │ Recommended Pattern │ Why             │
-├──────────────────────────────┼─────────────────────┼─────────────────┤
-│ Content pipeline             │ Sequential Pipeline │ Clear stages    │
-│ (research → write → edit)    │                     │                 │
-├──────────────────────────────┼─────────────────────┼─────────────────┤
-│ Code review                  │ Committee + Debate  │ Multiple views, │
-│                              │                     │ challenge       │
-├──────────────────────────────┼─────────────────────┼─────────────────┤
-│ Customer support routing     │ Dynamic Routing     │ Classification  │
-├──────────────────────────────┼─────────────────────┼─────────────────┤
-│ Feature implementation       │ Hierarchical        │ Decomposition   │
-├──────────────────────────────┼─────────────────────┼─────────────────┤
-│ Architecture exploration     │ Swarm               │ Ill-defined     │
-├──────────────────────────────┼─────────────────────┼─────────────────┤
-│ Investment analysis          │ Debate              │ High stakes     │
-├──────────────────────────────┼─────────────────────┼─────────────────┤
-│ Bug investigation            │ Swarm or Hierarch.  │ Depends on scope│
-└──────────────────────────────┴─────────────────────┴─────────────────┘
-```
-
-**Script:**
-"Let's map this to real tasks.
-
-Content pipeline—research, write, edit—that's a sequential pipeline. Clear stages, natural handoffs.
-
-Code review: we built this in Section 2. Committee for multiple perspectives, debate elements for surfacing disagreements.
-
-Customer support ticket routing: dynamic routing. Classify the query, send to the right specialist.
-
-Feature implementation: hierarchical. Tech lead decomposes, workers implement, lead integrates.
-
-Architecture exploration: swarm. You don't know what you'll find. Let agents explore and accumulate discoveries.
-
-Investment analysis: debate. High stakes, need to challenge the bull case with a bear case.
-
-Bug investigation is interesting—it depends. If you know where to look, hierarchical decomposition. If you have no idea, swarm exploration to find the root cause."
 
 ---
 
@@ -765,8 +773,9 @@ Please complete the course evaluation—your feedback shapes future sessions. Go
 ### Timing Checkpoints
 - 0:00 - Start Section 3 (Slide 54)
 - 0:05 - Finish intro, begin emergent overview (Slide 58)
-- 0:10 - Finish overview, begin demo walkthrough (Slide 60)
-- 0:20 - Finish demo walkthrough, begin decision framework (Slide 65)
+- 0:08 - claude-flow architecture (Slide 59)
+- 0:10 - Finish overview, begin demo walkthrough (Slide 61)
+- 0:20 - Finish demo walkthrough, begin decision framework (Slide 66)
 - 0:35 - Finish decision framework, begin best practices (Slide 72)
 - 0:42 - Finish best practices, begin Q&A (Slide 75)
 - 0:55 - Wrap-up and close (Slide 76)

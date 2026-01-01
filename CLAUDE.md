@@ -84,6 +84,7 @@ A 3-hour intermediate-level workshop on agentic software development with claude
     - `section-1-script.md` - Full script with slide descriptions (27 slides)
     - `section-2-outline.md` - Detailed lesson plan for Section 2
     - `section-2-script.md` - Full script with slide descriptions (26 slides)
+    - `section-3-script.md` - Full script with slide descriptions (23 slides)
 - `README.md` - Project overview and setup instructions
 
 ## Workshop Demos
