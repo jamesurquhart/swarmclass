@@ -46,7 +46,7 @@ A 3-hour intermediate-level workshop on agentic software development with claude
 
 **Section 3: Applying Multi-Agent Patterns** (60 min)
 - Outline: `presentation/scripts/section-3-outline.md`
-- Script: `presentation/scripts/section-3-script.md` (23 slides, 54-76)
+- Script: `presentation/scripts/section-3-script.md` (24 slides, 54-77)
 - Focus: Synthesis, decision-making, choosing the right architecture
 
 | Module | Time | Content |
@@ -84,7 +84,7 @@ A 3-hour intermediate-level workshop on agentic software development with claude
     - `section-1-script.md` - Full script with slide descriptions (27 slides)
     - `section-2-outline.md` - Detailed lesson plan for Section 2
     - `section-2-script.md` - Full script with slide descriptions (26 slides)
-    - `section-3-script.md` - Full script with slide descriptions (23 slides)
+    - `section-3-script.md` - Full script with slide descriptions (24 slides)
 - `README.md` - Project overview and setup instructions
 
 ## Workshop Demos

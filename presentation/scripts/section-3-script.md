@@ -1,7 +1,7 @@
 # Section 3: Applying Multi-Agent Patterns — Full Script
 
 **Duration:** 60 minutes
-**Slides:** 54-76 (23 slides)
+**Slides:** 54-77 (24 slides)
 **Focus:** Synthesis, decision-making, choosing the right architecture
 
 ---
@@ -166,7 +166,45 @@ The critical insight: there's no message bus between agents. No direct communica
 
 ---
 
-### Slide 60: How Swarms Coordinate
+### Slide 60: SPARC Methodology
+**Visual:** Five connected phases with agent mapping
+
+```
+SPARC: How claude-flow Guides Agent Collaboration
+
+S ─────► P ─────► A ─────► R ─────► C
+│        │        │        │        │
+▼        ▼        ▼        ▼        ▼
+
+┌─────────────┬─────────────┬─────────────┬─────────────┬─────────────┐
+│Specification│ Pseudocode  │Architecture │ Refinement  │ Completion  │
+├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+│ Define      │ Design      │ Define      │ Implement   │ Integrate   │
+│ testable    │ algorithms  │ components  │ via TDD     │ test, doc,  │
+│ requirements│ and logic   │ and systems │ cycles      │ deploy      │
+├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+│ Spec Agent  │ Design Agent│ Architect   │ Coder Agent │ Tester/Doc  │
+└─────────────┴─────────────┴─────────────┴─────────────┴─────────────┘
+                              │
+                    Each phase's output
+                    → stored in shared memory
+                    → discovered by next agent
+```
+
+**Script:**
+"SPARC is a methodology that gives structure to swarm collaboration. It stands for Specification, Pseudocode, Architecture, Refinement, and Completion.
+
+Each phase has a clear purpose and produces specific artifacts. Specification defines testable requirements. Pseudocode designs the algorithms. Architecture defines components and their interactions. Refinement implements through test-driven development cycles. Completion handles integration, optimization, and documentation.
+
+Here's how it connects to claude-flow: you can deploy a swarm where each agent specializes in one SPARC phase. The Spec agent writes requirements to shared memory. The Architect agent discovers those requirements and produces a design. The Coder agent discovers the design and implements it.
+
+The phases provide guardrails for emergence. Agents still discover work through shared memory—that's the swarm pattern—but SPARC gives them a structured progression. It's a hybrid: emergent coordination within a disciplined framework.
+
+You initialize a SPARC-based swarm with `claude-flow init --sparc`, which pre-configures agents for each phase. Our demo uses a simpler role-based approach, but SPARC shows how you can add methodology to swarm coordination."
+
+---
+
+### Slide 61: How Swarms Coordinate
 **Visual:** Numbered flow with shared memory at center
 
 ```
@@ -203,7 +241,7 @@ Results accumulate. The documenter eventually queries memory, sees all the compo
 
 ## Module 3.3: Demo Walkthrough — What a Swarm Built (10 min)
 
-### Slide 61: Demo 3 — The Task
+### Slide 62: Demo 3 — The Task
 **Visual:** Task description and agent list
 
 ```
@@ -232,7 +270,7 @@ No workflow was predefined. We just said 'build a todo app' and let the agents f
 
 ---
 
-### Slide 62: The Output — Files Created
+### Slide 63: The Output — Files Created
 **Visual:** File tree with descriptions
 
 ```
@@ -262,7 +300,7 @@ This actually works. You can open it in a browser and use it."
 
 ---
 
-### Slide 63: The Memory Trail
+### Slide 64: The Memory Trail
 **Visual:** Timeline of memory operations
 
 ```
@@ -305,7 +343,7 @@ This is emergence. Coordination from local decisions, not central control."
 
 ---
 
-### Slide 64: The Key Insight
+### Slide 65: The Key Insight
 **Visual:** Comparison quote
 
 ```
@@ -331,7 +369,7 @@ Both approaches produce working results. The question is which fits your problem
 
 ---
 
-### Slide 65: Section 2 vs. Section 3 Comparison
+### Slide 66: Section 2 vs. Section 3 Comparison
 **Visual:** Comparison table
 
 ```
@@ -364,7 +402,7 @@ Again, neither is better. They solve different problems. Now let's talk about ho
 
 ## Module 3.4: Decision Framework — Choosing Your Architecture (15 min)
 
-### Slide 66: The Central Question
+### Slide 67: The Central Question
 **Visual:** Large question with context
 
 ```
@@ -389,7 +427,7 @@ Let's build a decision framework around these."
 
 ---
 
-### Slide 67: Decision Tree
+### Slide 68: Decision Tree
 **Visual:** Flowchart
 
 ```
@@ -427,7 +465,7 @@ This is simplified. Let's go deeper."
 
 ---
 
-### Slide 68: Pattern Selection Guide
+### Slide 69: Pattern Selection Guide
 **Visual:** Detailed table
 
 ```
@@ -473,7 +511,7 @@ Swarm: best for exploratory, ill-defined tasks. Avoid when you need predictabili
 
 ---
 
-### Slide 69: Decision Criteria Deep Dive
+### Slide 70: Decision Criteria Deep Dive
 **Visual:** Four criteria tables
 
 ```
@@ -510,7 +548,7 @@ Quality: If you need to catch all issues, committee—multiple reviewers. If you
 
 ---
 
-### Slide 70: Hybrid Approaches
+### Slide 71: Hybrid Approaches
 **Visual:** Three hybrid pattern diagrams
 
 ```
@@ -545,7 +583,7 @@ The patterns are composable. Use structure where you need predictability, emerge
 
 ---
 
-### Slide 71: The Meta-Question
+### Slide 72: The Meta-Question
 **Visual:** Risk-based decision framework
 
 ```
@@ -583,7 +621,7 @@ This is a skill that develops with practice. You'll get a feel for it."
 
 ## Module 3.5: Best Practices and Safety (7 min)
 
-### Slide 72: Cost Awareness
+### Slide 73: Cost Awareness
 **Visual:** Cost multiplier table and controls
 
 ```
@@ -618,7 +656,7 @@ For production, build in circuit breakers. Maximum iterations, maximum total tok
 
 ---
 
-### Slide 73: Safety Rails
+### Slide 74: Safety Rails
 **Visual:** Safety checklist by pattern type
 
 ```
@@ -648,7 +686,7 @@ The more emergence you allow, the more guardrails you need."
 
 ---
 
-### Slide 74: Common Failure Modes
+### Slide 75: Common Failure Modes
 **Visual:** Failure table with prevention
 
 ```
@@ -693,7 +731,7 @@ Debugging multi-agent systems is harder than single agents. Test each agent in i
 
 ## Module 3.6: Q&A (13 min)
 
-### Slide 75: Q&A Topics
+### Slide 76: Q&A Topics
 **Visual:** Discussion prompts
 
 ```
@@ -729,7 +767,7 @@ What questions do you have?"
 
 ## Module 3.7: Course Wrap-Up (5 min)
 
-### Slide 76: Thank You & Key Takeaway
+### Slide 77: Thank You & Key Takeaway
 **Visual:** Combined closing slide
 
 ```
@@ -773,12 +811,13 @@ Please complete the course evaluation—your feedback shapes future sessions. Go
 ### Timing Checkpoints
 - 0:00 - Start Section 3 (Slide 54)
 - 0:05 - Finish intro, begin emergent overview (Slide 58)
-- 0:08 - claude-flow architecture (Slide 59)
-- 0:10 - Finish overview, begin demo walkthrough (Slide 61)
-- 0:20 - Finish demo walkthrough, begin decision framework (Slide 66)
-- 0:35 - Finish decision framework, begin best practices (Slide 72)
-- 0:42 - Finish best practices, begin Q&A (Slide 75)
-- 0:55 - Wrap-up and close (Slide 76)
+- 0:07 - claude-flow architecture (Slide 59)
+- 0:09 - SPARC methodology (Slide 60)
+- 0:11 - Finish overview, begin demo walkthrough (Slide 62)
+- 0:21 - Finish demo walkthrough, begin decision framework (Slide 67)
+- 0:36 - Finish decision framework, begin best practices (Slide 73)
+- 0:43 - Finish best practices, begin Q&A (Slide 76)
+- 0:55 - Wrap-up and close (Slide 77)
 - 1:00 - Course complete
 
 ### Materials Checklist
