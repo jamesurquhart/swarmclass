@@ -1,7 +1,7 @@
 # Section 3: Applying Multi-Agent Patterns — Full Script
 
 **Duration:** 60 minutes
-**Slides:** 54-77 (24 slides)
+**Slides:** 54-76 (23 slides)
 **Focus:** Synthesis, decision-making, choosing the right architecture
 
 ---
@@ -511,44 +511,7 @@ Swarm: best for exploratory, ill-defined tasks. Avoid when you need predictabili
 
 ---
 
-### Slide 70: Decision Criteria Deep Dive
-**Visual:** Four criteria tables
-
-```
-1. Problem Clarity
-┌───────────────────────┬─────────────────────┐
-│ Clarity Level         │ Pattern             │
-├───────────────────────┼─────────────────────┤
-│ Crystal clear workflow│ Pipeline            │
-│ Decomposable, complex │ Hierarchical        │
-│ Clear specialists     │ Dynamic Routing     │
-│ Unclear, exploratory  │ Swarm               │
-└───────────────────────┴─────────────────────┘
-
-2. Predictability Requirements
-┌───────────────────────┬─────────────────────┐
-│ Need                  │ Pattern             │
-├───────────────────────┼─────────────────────┤
-│ Audit trail required  │ Hierarchical, Pipe  │
-│ Reproducibility       │ Pipeline, Hierarch. │
-│ Results may vary (ok) │ Swarm, Debate       │
-└───────────────────────┴─────────────────────┘
-```
-
-**Script:**
-"Let's drill into the decision criteria.
-
-Problem clarity: If you have a crystal-clear workflow, use a pipeline. If it's decomposable but complex, hierarchical. If you need routing to specialists, dynamic routing. If it's unclear or exploratory, swarm.
-
-Predictability: If you need an audit trail or reproducibility—regulatory contexts, compliance—stick with hierarchical or pipeline. Central control gives you clear traces. If results may vary and that's acceptable—creative tasks, exploration—swarm and debate are fine.
-
-Time and cost: If you need to minimize latency, pipeline or routing—single execution path. If you need to minimize cost, single agent or simple pipeline. If thoroughness matters more than efficiency, committee or swarm.
-
-Quality: If you need to catch all issues, committee—multiple reviewers. If you need to challenge assumptions, debate. If you need comprehensive coverage of an unknown space, swarm."
-
----
-
-### Slide 71: Hybrid Approaches
+### Slide 70: Hybrid Approaches
 **Visual:** Three hybrid pattern diagrams
 
 ```
@@ -583,7 +546,7 @@ The patterns are composable. Use structure where you need predictability, emerge
 
 ---
 
-### Slide 72: The Meta-Question
+### Slide 71: The Meta-Question
 **Visual:** Risk-based decision framework
 
 ```
@@ -621,7 +584,7 @@ This is a skill that develops with practice. You'll get a feel for it."
 
 ## Module 3.5: Best Practices and Safety (7 min)
 
-### Slide 73: Cost Awareness
+### Slide 72: Cost Awareness
 **Visual:** Cost multiplier table and controls
 
 ```
@@ -656,7 +619,7 @@ For production, build in circuit breakers. Maximum iterations, maximum total tok
 
 ---
 
-### Slide 74: Safety Rails
+### Slide 73: Safety Rails
 **Visual:** Safety checklist by pattern type
 
 ```
@@ -686,7 +649,7 @@ The more emergence you allow, the more guardrails you need."
 
 ---
 
-### Slide 75: Common Failure Modes
+### Slide 74: Common Failure Modes
 **Visual:** Failure table with prevention
 
 ```
@@ -731,7 +694,7 @@ Debugging multi-agent systems is harder than single agents. Test each agent in i
 
 ## Module 3.6: Q&A (13 min)
 
-### Slide 76: Q&A Topics
+### Slide 75: Q&A Topics
 **Visual:** Discussion prompts
 
 ```
@@ -767,7 +730,7 @@ What questions do you have?"
 
 ## Module 3.7: Course Wrap-Up (5 min)
 
-### Slide 77: Thank You & Key Takeaway
+### Slide 76: Thank You & Key Takeaway
 **Visual:** Combined closing slide
 
 ```
@@ -815,9 +778,9 @@ Please complete the course evaluation—your feedback shapes future sessions. Go
 - 0:09 - SPARC methodology (Slide 60)
 - 0:11 - Finish overview, begin demo walkthrough (Slide 62)
 - 0:21 - Finish demo walkthrough, begin decision framework (Slide 67)
-- 0:36 - Finish decision framework, begin best practices (Slide 73)
-- 0:43 - Finish best practices, begin Q&A (Slide 76)
-- 0:55 - Wrap-up and close (Slide 77)
+- 0:35 - Finish decision framework, begin best practices (Slide 72)
+- 0:42 - Finish best practices, begin Q&A (Slide 75)
+- 0:55 - Wrap-up and close (Slide 76)
 - 1:00 - Course complete
 
 ### Materials Checklist
