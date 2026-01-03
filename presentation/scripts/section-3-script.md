@@ -123,7 +123,7 @@ Quick clarification: The Agentics Foundation is different from the AAIF—the Ag
                  ┌─────────────────────────────────┐
                  │        Swarm Orchestrator       │
                  │  • Agent lifecycle (spawn/stop) │
-                 │  • Task distribution            │
+                 │  • Role distribution            │
                  │  • Topology management          │
                  └────────────────┬────────────────┘
                                   │
