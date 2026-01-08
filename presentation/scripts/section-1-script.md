@@ -544,13 +544,17 @@ Network/Swarm  Emergent     Novel problem-solving
 **Script:**
 > I'm going to set up a Sequential Pipeline with two specialized agents. This will take about five minutes to run, so we'll start it and I'll explain what's happening while it works.
 >
-> Let me create a project directory.
+> Let me create a project directory and copy over the pre-built agent definitions.
 
 ```bash
 mkdir demo-research-write
 cd demo-research-write
-mkdir -p .claude/agents
+
+# Copy the pre-built source files from the course materials
+cp -r /path/to/swarmclass/demos/demo1_sources/.claude .
 ```
+
+> **Instructor note:** Execute from the `demos/demo1_sources/` directory in the course repository to retrieve the agent definitions. Adjust the path above to match your local setup.
 
 > Claude Code looks for agent definitions in `.claude/agents`. Each agent is a markdown file with YAML frontmatter.
 

@@ -76,45 +76,38 @@ If any check fails, see Troubleshooting section below.
 
 ## Setup (5 minutes)
 
-### Step 1: Create Project Directory
+### Step 1: Create Project Directory and Copy Source Files
 
 ```bash
 # Create and enter project directory
 mkdir demo-research-write
 cd demo-research-write
 
-# Create the agents directory
-mkdir -p .claude/agents
+# Copy the pre-built source files from the course materials
+cp -r /path/to/swarmclass/demos/demo1_sources/.claude .
 
 # Verify structure
-ls -la .claude/
+ls -la .claude/agents/
 ```
+
+> **Note:** Replace `/path/to/swarmclass` with the actual path to your course repository.
 
 **Expected output:**
 ```
-total 0
-drwxr-xr-x  3 user  staff   96 Dec 19 10:00 .
+total 16
+drwxr-xr-x  4 user  staff  128 Dec 19 10:00 .
 drwxr-xr-x  3 user  staff   96 Dec 19 10:00 ..
-drwxr-xr-x  2 user  staff   64 Dec 19 10:00 agents
+-rw-r--r--  1 user  staff  623 Dec 19 10:00 researcher.md
+-rw-r--r--  1 user  staff  541 Dec 19 10:00 writer.md
 ```
 
-### Step 2: Create the Researcher Agent
+The source files are pre-built in `demos/demo1_sources/`. The following sections show what these files contain for reference.
 
-Create the file `.claude/agents/researcher.md` with the following content:
+### Step 2: Review the Researcher Agent
 
-**Option A: Using a text editor**
-```bash
-# Open in your preferred editor
-code .claude/agents/researcher.md   # VS Code
-# OR
-nano .claude/agents/researcher.md   # Terminal editor
-# OR
-open -e .claude/agents/researcher.md # macOS TextEdit
-```
+The file `.claude/agents/researcher.md` (already copied) contains:
 
-**Option B: Using cat (copy-paste this entire block)**
-```bash
-cat > .claude/agents/researcher.md << 'EOF'
+```markdown
 ---
 name: researcher
 description: Use this agent to research topics, gather information, and compile findings. Invoke when you need comprehensive background research before writing or analysis.
@@ -136,21 +129,13 @@ Always structure your findings as:
 - **Gaps**: What information is still missing
 
 Be thorough but focused. Quality over quantity.
-EOF
 ```
 
-**Verify the file was created:**
-```bash
-cat .claude/agents/researcher.md
-```
+### Step 3: Review the Writer Agent
 
-### Step 3: Create the Writer Agent
+The file `.claude/agents/writer.md` (already copied) contains:
 
-Create the file `.claude/agents/writer.md`:
-
-**Using cat (copy-paste this entire block)**
-```bash
-cat > .claude/agents/writer.md << 'EOF'
+```markdown
 ---
 name: writer
 description: Use this agent to transform research and notes into polished written content. Invoke after research is complete and you need to produce a final document.
@@ -172,12 +157,6 @@ You are a Writing Specialist. Your role is to:
 
 ## Output
 Produce publication-ready content. Include a brief note about any areas where additional research might strengthen the piece.
-EOF
-```
-
-**Verify the file was created:**
-```bash
-cat .claude/agents/writer.md
 ```
 
 ### Step 4: Verify Setup
@@ -473,17 +452,34 @@ claude --print "Hello"  # Must authenticate
 mkdir demo-code-review
 cd demo-code-review
 
-# Create the agents directory
-mkdir -p .claude/agents
+# Copy the pre-built source files from the course materials
+cp -r /path/to/swarmclass/demos/demo2_sources/.claude .
+cp /path/to/swarmclass/demos/demo2_sources/sample.js .
 
 # Verify structure
-ls -la .claude/
+ls -la .claude/agents/
+ls -la sample.js
 ```
 
-### Step 2: Create the Security Reviewer Agent
+> **Note:** Replace `/path/to/swarmclass` with the actual path to your course repository.
 
-```bash
-cat > .claude/agents/security-reviewer.md << 'EOF'
+**Expected output:**
+```
+total 24
+drwxr-xr-x  5 user  staff  160 Dec 19 10:00 .
+drwxr-xr-x  3 user  staff   96 Dec 19 10:00 ..
+-rw-r--r--  1 user  staff  812 Dec 19 10:00 maintainability-reviewer.md
+-rw-r--r--  1 user  staff  756 Dec 19 10:00 performance-reviewer.md
+-rw-r--r--  1 user  staff  789 Dec 19 10:00 security-reviewer.md
+```
+
+The source files are pre-built in `demos/demo2_sources/`. The following sections show what these files contain for reference.
+
+### Step 2: Review the Security Reviewer Agent
+
+The file `.claude/agents/security-reviewer.md` (already copied) contains:
+
+```markdown
 ---
 name: security-reviewer
 description: Use this agent to review code for security vulnerabilities, injection risks, authentication issues, and exposed secrets.
@@ -517,18 +513,13 @@ For each issue:
 - Overall security assessment
 
 Be specific about line numbers. Focus only on security—ignore performance or style issues.
-EOF
 ```
 
-**Verify:**
-```bash
-cat .claude/agents/security-reviewer.md
-```
+### Step 3: Review the Performance Reviewer Agent
 
-### Step 3: Create the Performance Reviewer Agent
+The file `.claude/agents/performance-reviewer.md` (already copied) contains:
 
-```bash
-cat > .claude/agents/performance-reviewer.md << 'EOF'
+```markdown
 ---
 name: performance-reviewer
 description: Use this agent to review code for performance issues, algorithmic complexity, memory usage, and optimization opportunities.
@@ -562,13 +553,13 @@ For each issue:
 - Estimated performance improvement if fixed
 
 Be specific about line numbers. Focus only on performance—ignore security or style issues.
-EOF
 ```
 
-### Step 4: Create the Maintainability Reviewer Agent
+### Step 4: Review the Maintainability Reviewer Agent
 
-```bash
-cat > .claude/agents/maintainability-reviewer.md << 'EOF'
+The file `.claude/agents/maintainability-reviewer.md` (already copied) contains:
+
+```markdown
 ---
 name: maintainability-reviewer
 description: Use this agent to review code for maintainability issues including readability, naming, structure, and documentation needs.
@@ -603,15 +594,13 @@ For each issue:
 - Overall maintainability assessment
 
 Be specific about line numbers. Focus only on maintainability—ignore security or performance issues.
-EOF
 ```
 
-### Step 5: Create the Sample Code to Review
+### Step 5: Review the Sample Code
 
-Create `sample.js` with intentional issues for each reviewer to find:
+The file `sample.js` (already copied) contains intentional issues for each reviewer to find:
 
-```bash
-cat > sample.js << 'EOF'
+```javascript
 // User authentication handler
 const mysql = require('mysql');
 
@@ -659,7 +648,6 @@ function x(a, b) {
 }
 
 module.exports = { authenticateUser, getAllUsers, updateUserEmail, x };
-EOF
 ```
 
 ### Step 6: Verify Setup
@@ -904,6 +892,8 @@ rm -rf demo-code-review
 
 ## Part A: Pre-Recording Instructions (Before the Live Session)
 
+> **Quick Reference:** A condensed setup guide is available at `demos/demo3_sources/SETUP.md` in the course repository.
+
 Complete these steps **at least 24 hours before the live session** to ensure you have working artifacts.
 
 ---
@@ -961,17 +951,36 @@ pwd
 npx claude-flow@alpha init --force
 ```
 
-**Expected output:**
+**Expected output (abbreviated — actual output is verbose):**
 ```
-✓ Created .claude-flow/config.json
-✓ Created .claude-flow/memory/
-✓ Claude Flow initialized successfully
+🚀 Initializing Claude Flow v2.0.0 with enhanced features...
+✅ ✓ Created CLAUDE.md (Claude Flow v2.0.0 - Optimized)
+✅ ✓ Created .claude directory structure
+✅ ✓ Created .claude/settings.json with hooks and MCP configuration
+  ... (command docs created)
+✅ ✓ Initialized memory system
+✅ ✓ Initialized memory database (.swarm/memory.db)
+  🧠 Initializing ReasoningBank schema...
+✅ 🧠 Hive Mind System initialized successfully
+  ... (MCP servers configured)
+  📋 Agent system initialized with 64 specialized agents
+  📋 Command system initialized with comprehensive documentation
+  📋 Skill system initialized
+🎉 Claude Flow v2.0.0 initialization complete!
+
+📚 Quick Start:
+1. View available commands: ls .claude/commands/
+2. Start a swarm: npx claude-flow@alpha swarm "your objective" --claude
+3. Use hive-mind: npx claude-flow@alpha hive-mind spawn "command" --claude
 ```
 
 **Verify initialization:**
 ```bash
-ls -la .claude-flow/
-# Expected: config.json and memory/ directory
+ls -la .swarm/
+# Expected: memory.db (SQLite database for shared memory)
+
+ls .claude/agents/
+# Expected: 64+ specialized agent definitions
 ```
 
 **Step 3: Set Up Recording Tools**
@@ -994,90 +1003,40 @@ asciinema rec demo3-recording.cast
 
 **Start your recording now, then execute these steps:**
 
-**Step 4: Initialize Swarm**
+**Step 4: Run the Swarm**
+
+In claude-flow v2.0.0, the swarm command handles initialization, agent spawning, and task assignment in one step:
 
 ```bash
-npx claude-flow@alpha swarm init --topology mesh --max-agents 6
-```
-
-**Expected output:**
-```
-✓ Swarm initialized with mesh topology
-✓ Maximum agents: 6
-✓ Memory system ready
-```
-
-**Step 5: Spawn Specialized Agents**
-
-Spawn each agent one at a time, waiting for confirmation:
-
-```bash
-# Agent 1: Architect
-npx claude-flow@alpha swarm spawn architect "System Designer"
-# Expected: ✓ Spawned architect agent: System Designer
-
-# Agent 2: Frontend Developer
-npx claude-flow@alpha swarm spawn coder "Frontend Developer"
-# Expected: ✓ Spawned coder agent: Frontend Developer
-
-# Agent 3: Backend Developer
-npx claude-flow@alpha swarm spawn coder "Backend Developer"
-# Expected: ✓ Spawned coder agent: Backend Developer
-
-# Agent 4: QA Engineer
-npx claude-flow@alpha swarm spawn tester "QA Engineer"
-# Expected: ✓ Spawned tester agent: QA Engineer
-
-# Agent 5: Documentation Writer
-npx claude-flow@alpha swarm spawn documenter "Documentation Writer"
-# Expected: ✓ Spawned documenter agent: Documentation Writer
-```
-
-**Verify all agents spawned:**
-```bash
-npx claude-flow@alpha swarm status
-```
-
-**Expected output:**
-```
-Swarm Status: READY
-Active Agents: 5
-- architect (System Designer) - IDLE
-- coder-1 (Frontend Developer) - IDLE
-- coder-2 (Backend Developer) - IDLE
-- tester (QA Engineer) - IDLE
-- documenter (Documentation Writer) - IDLE
-```
-
-**Step 6: Open Second Terminal for Monitoring (Optional but Recommended)**
-
-In a new terminal window:
-```bash
-cd demo-swarm-recording
-npx claude-flow@alpha swarm status --watch
-```
-
-This shows real-time agent activity. Keep this visible during recording.
-
-**Step 7: Assign the Task**
-
-In your main terminal:
-```bash
-npx claude-flow@alpha swarm task "Build a todo list web application with HTML, CSS, and vanilla JavaScript. Include add, delete, and toggle complete functionality. Use localStorage for persistence." --strategy parallel --share-results
+npx claude-flow@alpha swarm "Build a simple todo list web application with HTML, CSS, and JavaScript. Include add, delete, and toggle complete functionality. Use localStorage for persistence." --claude
 ```
 
 **Expected behavior:**
-- Agents begin working (status changes from IDLE to WORKING)
+- claude-flow automatically spawns appropriate agents based on the task
+- Agents begin working and coordinating via shared memory
 - Files start appearing in the directory
 - Memory entries are logged
 - This may take 3-10 minutes depending on complexity
 
 **What to narrate during recording:**
-- "Notice how the architect agent writes first"
-- "The frontend and backend agents query for architecture decisions"
-- "Each agent discovers work rather than being assigned"
+- "We're giving the swarm a single objective—no predefined workflow"
+- "claude-flow automatically spawns and coordinates agents"
+- "Watch how agents discover work through shared memory rather than being assigned tasks"
 
-**Step 8: Wait for Completion**
+**Step 5: Monitor Progress (Optional)**
+
+In a new terminal window, you can monitor the swarm:
+```bash
+cd demo-swarm-recording
+npx claude-flow@alpha swarm status
+```
+
+Or watch memory activity:
+```bash
+npx claude-flow@alpha memory list
+```
+
+**Step 6: Wait for Completion**
 
 Watch the status terminal. When all agents return to IDLE or show COMPLETED:
 
@@ -1097,7 +1056,7 @@ Active Agents: 5
 - documenter (Documentation Writer) - COMPLETED
 ```
 
-**Step 9: Capture Memory Trail**
+**Step 7: Capture Memory Trail**
 
 ```bash
 # Export the memory log
@@ -1111,7 +1070,7 @@ ls -la *.log
 # Expected: memory-trail.log and memory-stats.log
 ```
 
-**Step 10: Verify Output Files**
+**Step 8: Verify Output Files**
 
 ```bash
 # List all generated files
@@ -1125,7 +1084,7 @@ ls index.html styles.css app.js README.md
 ls -la tests/ 2>/dev/null || echo "No tests directory (optional)"
 ```
 
-**Step 11: Test the Generated App**
+**Step 9: Test the Generated App**
 
 ```bash
 # Open in browser (macOS)
@@ -1143,7 +1102,7 @@ python3 -m http.server 8000
 - [ ] Can delete an item
 - [ ] Refreshing page preserves todos (localStorage)
 
-**Step 12: Stop Recording**
+**Step 10: Stop Recording**
 
 ```bash
 # If using asciinema

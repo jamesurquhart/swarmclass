@@ -443,15 +443,20 @@ Patterns: Hierarchical + Committee + Debate
 
 ### SCREEN: Project Setup
 **Script:**
-> Let me set up the project.
+> Let me set up the project by copying the pre-built source files.
 
 ```bash
 mkdir demo-code-review
 cd demo-code-review
-npm init -y
+
+# Copy the pre-built source files from the course materials
+cp -r /path/to/swarmclass/demos/demo2_sources/.claude .
+cp /path/to/swarmclass/demos/demo2_sources/sample.js .
 ```
 
-> We'll create a Node.js project that orchestrates our reviewers.
+> **Instructor note:** Execute from the `demos/demo2_sources/` directory in the course repository to retrieve the agent definitions and sample code. Adjust the path above to match your local setup.
+
+> This copies our three reviewer agents and the sample code they'll analyze.
 
 ---
 

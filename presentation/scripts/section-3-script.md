@@ -83,6 +83,8 @@ Section 3 Roadmap:
 
 Then we'll walk through a pre-recorded demo. Unlike our previous demos, this one was captured ahead of time. Swarm behavior is inherently unpredictable, and in hour three, I'd rather show you a clean run than wait for live execution.
 
+> **Instructor note:** Pre-recording instructions and setup guidance are in `demos/demo3_sources/SETUP.md` in the course repository.
+
 The centerpiece of this section is the decision framework—practical guidance for choosing which pattern to use. Then we'll cover cost, safety, and best practices. We'll finish with Q&A and, if time permits, a brief live demo."
 
 ---
@@ -147,7 +149,7 @@ Quick clarification: The Agentics Foundation is different from the AAIF—the Ag
    │                            │   │   External APIs · Tools    │
    │   (Agent Coordination)     │   │   (World Interaction)      │
    │                            │   │                            │
-   │   .claude-flow/memory/     │   │                            │
+   │      .swarm/memory.db      │   │                            │
    └────────────────────────────┘   └────────────────────────────┘
 ```
 
@@ -158,7 +160,7 @@ At the top is the **Swarm Orchestrator**. This manages agent lifecycle—spawnin
 
 Below that are the **Claude Code agents** themselves. Each agent is a full Claude Code instance with its own context window and specialized role. They run in parallel, independently.
 
-The key component is the **Shared Memory System**. This is where emergence happens. Agents STORE discoveries, decisions, and artifacts. Other agents QUERY memory to find context and discover work. The memory system lives in `.claude-flow/memory/` and persists across the swarm's execution.
+The key component is the **Shared Memory System**. This is where emergence happens. Agents STORE discoveries, decisions, and artifacts. Other agents QUERY memory to find context and discover work. The memory system is a SQLite database at `.swarm/memory.db` that persists across the swarm's execution.
 
 On the other side, **MCP Servers** provide tool access—file operations, web search, external APIs. Each agent connects to MCP for interacting with the outside world.
 
