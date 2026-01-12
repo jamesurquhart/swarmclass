@@ -614,47 +614,66 @@ Reduces false positives AND false negatives
 
 *[Return to screen share]*
 
-### SCREEN: Coordinator Code
+### SCREEN: Run the Demo
 **Script:**
-> Now let's add the coordinator that ties everything together.
+> Now let's run the full demo. The coordinator logic isn't a separate file—it's built into the prompt we give Claude Code. Claude's Task tool handles spawning subagents and synthesizing their results.
 
-*[Show coordinator synthesis code]*
+**If following along independently:** Ensure you've completed the setup from section 2.4:
 
-```javascript
-const synthesis = await query({
-  prompt: `You are a Code Review Coordinator.
-Synthesize these three specialized reviews:
+```bash
+# Create project and copy source files
+mkdir demo-code-review
+cd demo-code-review
+cp -r /path/to/swarmclass/demos/demo2_sources/.claude .
+cp /path/to/swarmclass/demos/demo2_sources/sample.js .
 
-SECURITY REVIEW:
-${reviews.security}
-
-PERFORMANCE REVIEW:
-${reviews.performance}
-
-MAINTAINABILITY REVIEW:
-${reviews.maintainability}
-
-Create a unified report that:
-1. Highlights consensus issues (multiple reviewers)
-2. Flags contradictions between reviewers
-3. Prioritizes the top 5 issues to address
-4. Provides overall code health score (A-F)`,
-});
+# Initialize Claude Code in this directory
+claude /init
 ```
 
-> The coordinator receives all three reviews and synthesizes them. It identifies consensus—issues multiple reviewers flagged. It surfaces contradictions—where reviewers disagree. It prioritizes—what should be fixed first? And it scores overall code health.
+> **Note:** Replace `/path/to/swarmclass` with your actual path to the course repository.
+
+**Launch Claude Code:**
+
+```bash
+claude
+```
+
+**Enter the coordinator prompt** (copy and paste this entire prompt into Claude Code):
+
+```
+I need a comprehensive code review of sample.js using three specialized reviewers.
+
+Execute this multi-agent review process:
+
+1. PARALLEL REVIEW PHASE: Run all three reviewers simultaneously on sample.js:
+   - Use the security-reviewer subagent to analyze for security vulnerabilities
+   - Use the performance-reviewer subagent to analyze for performance issues
+   - Use the maintainability-reviewer subagent to analyze for maintainability concerns
+
+   Save each review to a separate file:
+   - security-review.md
+   - performance-review.md
+   - maintainability-review.md
+
+2. SYNTHESIS PHASE: After all reviews are complete, create a unified report:
+   - Read all three review files
+   - Identify CONSENSUS issues (found by multiple reviewers)
+   - Identify CONFLICTS (where reviewers might disagree on priority/approach)
+   - Create a prioritized list of the top 5 issues to fix first
+   - Assign an overall code health grade (A-F)
+   - Save the final report to code-review-report.md
+
+Be explicit about which issues multiple reviewers agreed on and any tensions between different concerns.
+```
+
+> This prompt acts as the coordinator. It instructs Claude to spawn three subagents in parallel, collect their outputs, then synthesize a unified report. The coordinator logic—identifying consensus, surfacing conflicts, prioritizing—is all in the prompt itself.
 
 ---
 
-### SCREEN: Run the Demo
+### SCREEN: Demo Running
 **Script:**
-> Let's run it.
-
-```bash
-node review-system.js sample.js
-```
-
-> Watch the output. You'll see all three reviewers start simultaneously—that's the Committee pattern, parallel execution.
+> Watch the output. You'll see all three reviewers start—that's the Committee pattern, parallel execution.
 
 *[Point to terminal output as reviewers complete]*
 
@@ -679,6 +698,37 @@ node review-system.js sample.js
 > The parallel execution meant wall-clock time is roughly the time of the slowest reviewer, not the sum of all three. Committee pattern efficiency.
 >
 > Now we'll see if they disagreed on anything, and how the coordinator handles it.
+
+---
+
+### Expected Output Files
+
+After the demo completes, you should have:
+
+```
+demo-code-review/
+├── .claude/agents/
+│   ├── security-reviewer.md
+│   ├── performance-reviewer.md
+│   └── maintainability-reviewer.md
+├── sample.js
+├── security-review.md          ← Generated
+├── performance-review.md       ← Generated
+├── maintainability-review.md   ← Generated
+└── code-review-report.md       ← Generated (final synthesis)
+```
+
+View the results:
+
+```bash
+# Individual reviews
+cat security-review.md
+cat performance-review.md
+cat maintainability-review.md
+
+# Final synthesized report
+cat code-review-report.md
+```
 
 ---
 
