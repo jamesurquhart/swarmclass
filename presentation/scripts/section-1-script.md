@@ -552,9 +552,12 @@ cd demo-research-write
 
 # Copy the pre-built source files from the course materials
 cp -r /path/to/swarmclass/demos/demo1_sources/.claude .
+
+# Initialize Claude Code in this directory
+claude /init
 ```
 
-> **Instructor note:** Execute from the `demos/demo1_sources/` directory in the course repository to retrieve the agent definitions. Adjust the path above to match your local setup.
+> **Instructor note:** Execute from the `demos/demo1_sources/` directory in the course repository to retrieve the agent definitions. Adjust the path above to match your local setup. The `claude /init` command initializes Claude Code in the project directory, enabling it to discover the custom agents in `.claude/agents/`.
 
 > Claude Code looks for agent definitions in `.claude/agents`. Each agent is a markdown file with YAML frontmatter.
 

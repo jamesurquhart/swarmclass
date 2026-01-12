@@ -452,9 +452,12 @@ cd demo-code-review
 # Copy the pre-built source files from the course materials
 cp -r /path/to/swarmclass/demos/demo2_sources/.claude .
 cp /path/to/swarmclass/demos/demo2_sources/sample.js .
+
+# Initialize Claude Code in this directory
+claude /init
 ```
 
-> **Instructor note:** Execute from the `demos/demo2_sources/` directory in the course repository to retrieve the agent definitions and sample code. Adjust the path above to match your local setup.
+> **Instructor note:** Execute from the `demos/demo2_sources/` directory in the course repository to retrieve the agent definitions and sample code. Adjust the path above to match your local setup. The `claude /init` command initializes Claude Code in the project directory, enabling it to discover the custom agents in `.claude/agents/`.
 
 > This copies our three reviewer agents and the sample code they'll analyze.
 
