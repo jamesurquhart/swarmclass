@@ -73,7 +73,9 @@ npm install -g claude-flow@alpha
 
 ## Instructor
 
-**James Urquhart** — Principal at Urquhart Strategic Solutions. Author of *Flow Architectures: The Future of Streaming and Event-Driven Integration* (O'Reilly, 2021). 30+ years experience in distributed systems, cloud computing, and automation.
+**James Urquhart** — Principal at Urquhart Strategic Solutions. Author of [*Flow Architectures: The Future of Streaming and Event-Driven Integration*](https://www.amazon.com/Flow-Architectures-Streaming-Event-Driven-Integration/dp/1492075892) (O'Reilly, 2021). 30+ years experience in distributed systems, cloud computing, and automation.
+
+LinkedIn: https://www.linkedin.com/in/jurquhart/
 
 ## License
 
